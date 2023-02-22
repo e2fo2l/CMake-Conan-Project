@@ -121,11 +121,12 @@ jobs:
       run: |
         cd build
         cmake --build . --config "${{ env.BUILD_TYPE }}"
+        move bin/Release.zip bin/${{ env.PROJECT_NAME }}.zip
     
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ env.PROJECT_NAME }}.windows-x86.zip
-        path: build/bin/Release.zip
+        path: build/bin/${{ env.PROJECT_NAME }}.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -136,11 +137,17 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: ${{ env.PROJECT_NAME }}.ubuntu-x64.tar.gz
+        path: ${{ github.workspace }}
 
     - name: Download Windows x86 release
       uses: actions/download-artifact@v3
       with:
         name: ${{ env.PROJECT_NAME }}.windows-x86.zip
+        path: ${{ github.workspace }}
+    
+    - name: List files
+      run: |
+        ls -lah
 
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -148,5 +155,5 @@ jobs:
       with:
         fail_on_unmatched_files: true
         files: |
-          ${{ env.PROJECT_NAME }}.ubuntu-x64.tar.gz
-          ${{ env.PROJECT_NAME }}.windows-x86.zip
+          ${{ github.workspace }}/${{ env.PROJECT_NAME }}.ubuntu-x64.tar.gz
+          ${{ github.workspace }}/${{ env.PROJECT_NAME }}.windows-x86.zip
