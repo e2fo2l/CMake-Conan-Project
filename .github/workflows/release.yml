@@ -69,7 +69,7 @@ jobs:
     - name: Archive build
       run: |
         cd build/bin
-        tar -cvzf ../../$PROJECT_NAME.tar.gz *
+        tar -cvzf $PROJECT_NAME.tar.gz *
     
     - uses: actions/upload-artifact@v3
       with:
@@ -85,7 +85,7 @@ jobs:
     - name: Cache Conan packages
       uses: actions/cache@v3
       with:
-        path: C:\Users\runneradmin\.conan\.conan\data
+        path: C:\Users\runneradmin\.conan\data
         key: release-windows-x86-conan-packages-${{ hashFiles('conanfile.txt') }}
         restore-keys: release-windows-x86-conan-packages-
 
