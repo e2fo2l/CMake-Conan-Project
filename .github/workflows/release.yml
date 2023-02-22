@@ -73,8 +73,8 @@ jobs:
     
     - uses: actions/upload-artifact@v3
       with:
-        name: $PROJECT_NAME.ubuntu-x64.tar.gz
-        path: build/bin/$PROJECT_NAME.tar.gz
+        name: ${{ env.PROJECT_NAME }}.ubuntu-x64.tar.gz
+        path: build/bin/${{ env.PROJECT_NAME }}.tar.gz
 
   build-windows-x86:
     runs-on: windows-latest
@@ -125,12 +125,12 @@ jobs:
     - name: Archive build
       run: |
         cd build/bin
-        7z a -tzip  "${{ env.BUILD_TYPE }}.zip" *
+        7z a -tzip  "${{ env.PROJECT_NAME }}.zip" *
     
     - uses: actions/upload-artifact@v3
       with:
-        name: $PROJECT_NAME.windows-x86.zip
-        path: build/bin/$PROJECT_NAME.zip
+        name: ${{ env.PROJECT_NAME }}.windows-x86.zip
+        path: build/bin/${{ env.PROJECT_NAME }}.zip
 
   deploy:
     runs-on: ubuntu-latest
