@@ -25,7 +25,6 @@ jobs:
     - name: Create Conan profile
       run: |
         conan profile new default --detect
-        conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
 
     - name: Install conan packages
       run: |
@@ -33,8 +32,17 @@ jobs:
 
     - name: CMake init
       run: |
-        cmake -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE .
+        cmake -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -GNinja .
 
     - name: Build
       run: |
         cmake --build .
+    
+    - name: Archive build
+      run: |
+        tar -cvzf debug.tar.gz bin/*
+    
+    - uses: actions/upload-artifact@v3
+      with:
+        name: debug.tar.gz
+        path: debug.tar.gz
