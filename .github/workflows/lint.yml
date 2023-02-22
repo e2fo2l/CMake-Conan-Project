@@ -1,0 +1,23 @@
+name: Lint
+
+on: [push, pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install clang-format
+      run: |
+        sudo apt update
+        sudo apt install -y clang-format
+
+    - name: Run linters
+      uses: wearerequired/lint-action@v2
+      with:
+        clang_format: true
+        clang_format_auto_fix: false
+        clang_format_args: --style=Mozilla
+        continue_on_error: false
