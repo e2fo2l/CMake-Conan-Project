@@ -26,6 +26,7 @@ jobs:
     - name: Install conan packages
       run: |
         conan install . --build missing -pr default -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
+        ls -lah
 
     - name: CMake init
       run: |
