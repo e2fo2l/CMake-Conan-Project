@@ -115,17 +115,17 @@ jobs:
     - name: CMake init
       run: |
         cd build
-        cmake -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
+        cmake -DCMAKE_BUILD_TYPE="${{ env.BUILD_TYPE }}" ..
 
     - name: Build
       run: |
         cd build
-        cmake --build . --config %BUILD_TYPE%
+        cmake --build . --config "${{ env.BUILD_TYPE }}"
     
     - name: Archive build
       run: |
         cd build/bin
-        7z a -tzip  %PROJECT_NAME%.zip *
+        7z a -tzip  "${{ env.BUILD_TYPE }}.zip" *
     
     - uses: actions/upload-artifact@v3
       with:
