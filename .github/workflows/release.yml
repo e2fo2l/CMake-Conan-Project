@@ -140,12 +140,12 @@ jobs:
     - name: Download Ubuntu x64 release
       uses: actions/download-artifact@v3
       with:
-        name: $PROJECT_NAME.ubuntu-x64.tar.gz
+        name: ${{ env.PROJECT_NAME }}.ubuntu-x64.tar.gz
 
     - name: Download Windows x86 release
       uses: actions/download-artifact@v3
       with:
-        name: $PROJECT_NAME.windows-x86.zip
+        name: ${{ env.PROJECT_NAME }}.windows-x86.zip
 
     - name: Release
       uses: softprops/action-gh-release@v1
@@ -153,5 +153,5 @@ jobs:
       with:
         fail_on_unmatched_files: true
         files: |
-          $PROJECT_NAME.ubuntu-x64.tar.gz
-          $PROJECT_NAME.windows-x86.zip
+          ${{ env.PROJECT_NAME }}.ubuntu-x64.tar.gz
+          ${{ env.PROJECT_NAME }}.windows-x86.zip
