@@ -14,17 +14,13 @@ jobs:
 
     - uses: turtlebrowser/get-conan@v1.0
 
-    - name: Update Conan profile
-      run: |
-        conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
-
     - name: Install conan packages
       run: |
         conan install . --build missing -pr default -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
 
     - name: CMake init
       run: |
-        cmake -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE .
+        cmake -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE -GNinja .
 
     - name: Build
       run: |
