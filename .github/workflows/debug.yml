@@ -12,7 +12,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: turtlebrowser/get-conan@v1.0
+    - name: Install Conan
+      uses: turtlebrowser/get-conan@main
       with:
         version: 1.59.0
 
