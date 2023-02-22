@@ -1,0 +1,32 @@
+name: Debug build
+
+on: [push, pull_request]
+
+env:
+  BUILD_TYPE: Debug
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - uses: turtlebrowser/get-conan@v1.0
+
+    - name: Create Conan profile
+      run: |
+        conan profile new default --detect
+        conan profile update conf.tools.cmake.cmaketoolchain:generator=Ninja default
+
+    - name: Install conan packages
+      run: |
+        conan install . --build missing -pr default -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
+
+    - name: CMake init
+      run: |
+        cmake -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE .
+
+    - name: Build
+      run: |
+        cmake --build .
