@@ -14,6 +14,11 @@ jobs:
 
     - uses: turtlebrowser/get-conan@v1.0
 
+    - name: Install dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y ninja-build
+
     - name: Create Conan profile
       run: |
         conan profile detect
