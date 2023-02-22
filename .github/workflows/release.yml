@@ -126,7 +126,7 @@ jobs:
     - uses: actions/upload-artifact@v3
       with:
         name: ${{ env.PROJECT_NAME }}.windows-x86.zip
-        path: build/bin/${{ env.PROJECT_NAME }}.windows-x86
+        path: build/bin/${{ env.PROJECT_NAME }}.windows-x86.zip
 
   deploy:
     runs-on: ubuntu-latest
