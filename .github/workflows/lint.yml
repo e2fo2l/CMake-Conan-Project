@@ -2,6 +2,10 @@ name: Lint
 
 on: [push, pull_request]
 
+permissions:
+  checks: write
+  contents: write
+
 jobs:
   lint:
     runs-on: ubuntu-latest
