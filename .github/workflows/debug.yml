@@ -14,6 +14,10 @@ jobs:
 
     - uses: turtlebrowser/get-conan@v1.0
 
+    - name: Create Conan profile
+      run: |
+        conan profile detect
+
     - name: Install conan packages
       run: |
         conan install . --build missing -pr default -c tools.system.package_manager:mode=install -c tools.system.package_manager:sudo=True
