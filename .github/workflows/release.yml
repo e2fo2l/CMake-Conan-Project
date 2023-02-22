@@ -115,12 +115,12 @@ jobs:
     - name: CMake init
       run: |
         cd build
-        cmake -DCMAKE_BUILD_TYPE=$BUILD_TYPE ..
+        cmake -DCMAKE_BUILD_TYPE=%BUILD_TYPE% ..
 
     - name: Build
       run: |
         cd build
-        cmake --build . --config $BUILD_TYPE
+        cmake --build . --config %BUILD_TYPE%
     
     - name: Archive build
       run: |
