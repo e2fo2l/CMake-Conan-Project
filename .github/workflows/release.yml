@@ -108,7 +108,7 @@ jobs:
 
     - name: Install conan packages
       run: |
-        if not exist build mkdir build
+        New-Item -ItemType Directory -Force -Path build
         cd build
         conan install .. --build missing -pr default
 
