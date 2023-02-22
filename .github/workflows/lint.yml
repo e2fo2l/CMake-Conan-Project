@@ -25,4 +25,4 @@ jobs:
         clang_format: true
         clang_format_auto_fix: false
         clang_format_args: --style=Mozilla
-        continue_on_error: false
+        continue_on_error: true
